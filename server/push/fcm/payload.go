@@ -307,7 +307,8 @@ func apnsShouldPresentAlert(what, callStatus, isSilent string, config *configTyp
 	logs.Info.Println("fcm apnsShouldPresentAlert:", isSilent)
 	logs.Info.Println("fcm apnsShouldPresentAlert:", config)
 	logs.Info.Println("fcm apnsShouldPresentAlert:", config.Apns)
-	return config.Apns != nil && config.Apns.Enabled && what != push.ActRead && callStatus == "" && isSilent == ""
+	//return config.Apns != nil && config.Apns.Enabled && what != push.ActRead && callStatus == "" && isSilent == ""
+	return what != push.ActRead && callStatus == "" && isSilent == ""
 }
 
 func apnsNotificationConfig(what, topic string, data map[string]string, unread int, config *configType) *fcmv1.ApnsConfig {
