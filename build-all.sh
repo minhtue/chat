@@ -145,20 +145,20 @@ done
 # Build chatbot release
 echo "Building python code..."
 
-./build-py-grpc.sh
+#./build-py-grpc.sh
 
 # Release chatbot
 echo "Packaging chatbot.py..."
 rm -fR ./releases/tmp
 mkdir -p ./releases/tmp
 
-cp ${GOSRC}/chat/chatbot/python/chatbot.py ./releases/tmp
-cp ${GOSRC}/chat/chatbot/python/quotes.txt ./releases/tmp
-cp ${GOSRC}/chat/chatbot/python/requirements.txt ./releases/tmp
+#cp ${GOSRC}/chat/chatbot/python/chatbot.py ./releases/tmp
+#cp ${GOSRC}/chat/chatbot/python/quotes.txt ./releases/tmp
+#cp ${GOSRC}/chat/chatbot/python/requirements.txt ./releases/tmp
 
-tar -C ${GOSRC}/chat/releases/tmp -zcf ./releases/${version}/py-chatbot.tar.gz .
+#tar -C ${GOSRC}/chat/releases/tmp -zcf ./releases/${version}/py-chatbot.tar.gz .
 pushd ./releases/tmp > /dev/null
-zip -q -r ../${version}/py-chatbot.zip ./*
+#zip -q -r ../${version}/py-chatbot.zip ./*
 popd > /dev/null
 
 # Release tn-cli
