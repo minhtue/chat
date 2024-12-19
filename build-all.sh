@@ -31,7 +31,7 @@ fi
 
 echo "Releasing $version"
 
-GOSRC=..
+GOSRC="/home/builds/tinode"
 
 pushd ${GOSRC}/chat > /dev/null
 

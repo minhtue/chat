@@ -302,6 +302,9 @@ func androidNotificationConfig(what, topic string, data map[string]string, confi
 }
 
 func apnsShouldPresentAlert(what, callStatus, isSilent string, config *configType) bool {
+	logs.Info.Println("fcm apnsShouldPresentAlert:", what)
+	logs.Info.Println("fcm apnsShouldPresentAlert:", callStatus)
+	logs.Info.Println("fcm apnsShouldPresentAlert:", isSilent)
 	return config.Apns != nil && config.Apns.Enabled && what != push.ActRead && callStatus == "" && isSilent == ""
 }
 
