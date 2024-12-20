@@ -377,12 +377,15 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 					if notei != nil {
 						logs.Info.Println("fcm Topic Note:", notei)
 
-						xfrom := data["xfrom"]
-						
-						logs.Info.Println("fcm xfrom: ", xfrom)
+						xfrom := data["xfrom"].(string)
+
 						note := jsonToMap(notei.(string))
-						logs.Info.Println("fcm Topic Note: ", note)
-						logs.Info.Println("fcm Topic Note: ", note["handyman_name"].(string))
+						owner_uid := note["owner_uid"].(string)
+						handyman_name := note["handyman_name"].(string)
+
+						logs.Info.Println("fcm xfrom: ", xfrom)
+						logs.Info.Println("fcm owner_uid: ", owner_uid)
+						logs.Info.Println("fcm handyman_name: ", handyman_name)
 					}
 					fn := public["fn"]
 					if fn != nil {
