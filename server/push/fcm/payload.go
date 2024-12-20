@@ -358,6 +358,7 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 		title := ""
 		image := ""
 		static_domain := config.Apns.GetStringField(what, "StaticDomain")
+		logs.Info.Println("fcm static_domain:", static_domain)
 
 		topicData, _err := store.Topics.Get(topic)
 
@@ -385,6 +386,8 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 						note := jsonToMap(notei.(string))
 
 						chore_image := note["chore_image"]
+						
+						logs.Info.Println("fcm Chore Image:", chore_image)
 						if chore_image != nil {
 							if strings.HasPrefix(chore_image.(string), "/") {
 								image = static_domain + chore_image.(string)
