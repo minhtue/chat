@@ -360,7 +360,9 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 
 			if public, ok := topicData.Public; ok {
 				logs.Info.Println("fcm Topic Public:", public)
-				logs.Info.Println("fcm Topic Note:", public["Note"])
+				
+				note := public.FieldByName("note")
+				logs.Info.Println("fcm Topic Note:", note)
 			}
 
 			logs.Info.Println("fcm Topic Name:", title)
