@@ -5,6 +5,7 @@ import (
 	"errors"
 	"strconv"
 	"time"
+	"strings"
 
 	fcmv1 "google.golang.org/api/fcm/v1"
 
@@ -355,6 +356,8 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 	if apnsShouldPresentAlert(what, callStatus, data["silent"], config) {
 		body := config.Apns.GetStringField(what, "Body")
 		title := ""
+		image := ""
+		static_domain := config.Apns.GetStringField(what, "StaticDomain")
 
 		topicData, _err := store.Topics.Get(topic)
 
@@ -381,6 +384,14 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 
 						note := jsonToMap(notei.(string))
 
+						chore_image := note["chore_image"]
+						if chore_image != nil {
+							if strings.HasPrefix(chore_image.(string), "/") {
+								image = static_domain + chore_image.(string)
+							} else {
+								image = chore_image.(string)
+							}
+						}
 						owner_uid := note["owner_uid"]
 						handyman_name := note["handyman_name"]
 						owner_name := note["owner_name"]
@@ -395,11 +406,6 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 								}
 							}
 						}
-						
-
-						logs.Info.Println("fcm xfrom: ", xfrom)
-						logs.Info.Println("fcm owner_uid: ", owner_uid)
-						logs.Info.Println("fcm handyman_name: ", handyman_name)
 					}
 					if title == "" {
 						fn := public["fn"]
@@ -410,10 +416,7 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 				}
 				
 			}
-			logs.Info.Println("fcm Topic Name:", title)
 		}
-
-		logs.Info.Println("fcm Topic Info:", topicData)
 
 		if body == "$content" {
 			body = data["content"]
@@ -423,6 +426,7 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 		logs.Info.Println("fcm initTopic:", topic)
 
 		apsPayload.Alert = &common.ApsAlert{
+			Image:			 image,
 			Action:          config.Apns.GetStringField(what, "Action"),
 			ActionLocKey:    config.Apns.GetStringField(what, "ActionLocKey"),
 			Body:            body,
