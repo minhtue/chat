@@ -348,6 +348,11 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 	// Do not present alert for read notifications and video calls.
 	if apnsShouldPresentAlert(what, callStatus, data["silent"], config) {
 		body := config.Apns.GetStringField(what, "Body")
+
+		topicData, _err := store.Topics.Get(topic)
+
+		logs.Info.Println("fcm Topic Info:", topicData)
+
 		if body == "$content" {
 			body = data["content"]
 		}
