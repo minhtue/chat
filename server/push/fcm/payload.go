@@ -310,6 +310,12 @@ func apnsShouldPresentAlert(what, callStatus, isSilent string, config *configTyp
 	return config.Apns != nil && config.Apns.Enabled && what != push.ActRead && callStatus == "" && isSilent == ""
 }
 
+func jsonToMap(jsonStr string) map[string]interface{} {
+    result := make(map[string]interface{})
+    json.Unmarshal([]byte(jsonStr), &result)
+    return result
+}
+
 func apnsNotificationConfig(what, topic string, data map[string]string, unread int, config *configType) *fcmv1.ApnsConfig {
 	callStatus := data["webrtc"]
 	expires := time.Now().UTC().Add(time.Duration(defaultTimeToLive) * time.Second)
@@ -383,7 +389,7 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 						}
 						if jsonData != nil{
 							c := make(map[string]json.RawMessage)
-							e := json.Unmarshal(jsonData, &c)
+							e := json.Unmarshal(notei, &c)
 							if e != nil {
 						        logs.Info.Println("fcm err:", e)
 						    }
