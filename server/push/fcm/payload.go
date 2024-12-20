@@ -377,6 +377,7 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 					note := public["note"]
 					if note != nil {
 						logs.Info.Println("fcm Topic Note:", note)
+						logs.Info.Println("fcm Topic Handyman:", note["handyman_name"])
 					}
 				}
 				
