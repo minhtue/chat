@@ -383,7 +383,12 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 					notei := public["note"]
 					if notei != nil {
 						logs.Info.Println("fcm Topic Note:", notei)
-						logs.Info.Println("fcm Topic Note:", notei["handyman_name"].(string))
+						var note map[string]interface{}
+						err = json.Unmarshal([]byte(notei), &note)
+					    if err != nil {
+					        ogs.Info.Println("fcm err:", err)
+					    }
+						logs.Info.Println("fcm Topic Note:", note["handyman_name"].(string))
 					}
 				}
 				
