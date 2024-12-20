@@ -374,6 +374,10 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 					} else {
 						logs.Info.Println("fcm Topic fn is nil")
 					}
+					note := public["note"]
+					if note != nil {
+						logs.Info.Println("fcm Topic Note:", note)
+					}
 				}
 				
 			}
