@@ -364,8 +364,8 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 			if public != nil {
 				logs.Info.Println("fcm Topic Public:", public)
 
-				v := reflect.ValueOf(public)
-				logs.Info.Println("fcm Topic Note:", v)
+				fn := public["fn"]
+				logs.Info.Println("fcm Topic fn:", fn)
 				// val := reflect.ValueOf(public).Elem()
  				// note := val.FieldByName("Note").Interface().(string)
 				
