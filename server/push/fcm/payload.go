@@ -356,11 +356,8 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 	if apnsShouldPresentAlert(what, callStatus, data["silent"], config) {
 		body := config.Apns.GetStringField(what, "Body")
 		title := ""
-		image := ""
-		static_domain := config.Apns.GetStringField(what, "StaticDomain")
-		if static_domain == "" {
-			static_domain = "https://dev.azchore.ca"
-		}
+		image := "https://dev.azchore.ca"
+		
 		logs.Info.Println("fcm Apns:", config.Apns)
 		logs.Info.Println("fcm static_domain:", static_domain)
 
@@ -393,11 +390,7 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 
 						logs.Info.Println("fcm Chore Image:", chore_image)
 						if chore_image != nil {
-							if strings.HasPrefix(chore_image.(string), "/") || strings.HasPrefix(chore_image.(string), "\/") {
-								image = static_domain + chore_image.(string)
-							} else {
-								image = chore_image.(string)
-							}
+							image += chore_image.(string)
 						}
 						owner_uid := note["owner_uid"]
 						handyman_name := note["handyman_name"]
