@@ -358,7 +358,7 @@ func androidNotificationConfig(what, topic string, data map[string]string, confi
 		Icon:                 config.Android.GetStringField(what, "Icon"),
 		Color:                config.Android.GetStringField(what, "Color"),
 		ClickAction:          config.Android.GetStringField(what, "ClickAction"),
-		Image:				  image
+		Image:				  image,
 	}
 
 	return ac
