@@ -358,7 +358,7 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 		title := ""
 		image := ""
 		static_domain := config.Apns.GetStringField(what, "StaticDomain")
-		if static_domain == nil || static_domain == "" {
+		if static_domain == "" {
 			static_domain = "https://dev.azchore.ca"
 		}
 		logs.Info.Println("fcm Apns:", config.Apns)
