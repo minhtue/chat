@@ -302,13 +302,12 @@ func androidNotificationConfig(what, topic string, data map[string]string, confi
 }
 
 func apnsShouldPresentAlert(what, callStatus, isSilent string, config *configType) bool {
+	//tuehm
 	logs.Info.Println("fcm apnsShouldPresentAlert:", what)
 	logs.Info.Println("fcm apnsShouldPresentAlert:", callStatus)
 	logs.Info.Println("fcm apnsShouldPresentAlert:", isSilent)
-	logs.Info.Println("fcm apnsShouldPresentAlert:", config)
 	logs.Info.Println("fcm apnsShouldPresentAlert:", config.Apns)
-	//return config.Apns != nil && config.Apns.Enabled && what != push.ActRead && callStatus == "" && isSilent == ""
-	return what != push.ActRead && callStatus == "" && isSilent == ""
+	return config.Apns != nil && config.Apns.Enabled && what != push.ActRead && callStatus == "" && isSilent == ""
 }
 
 func apnsNotificationConfig(what, topic string, data map[string]string, unread int, config *configType) *fcmv1.ApnsConfig {
@@ -352,6 +351,8 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 		if body == "$content" {
 			body = data["content"]
 		}
+
+		logs.Info.Println("fcm apnsShouldPresentAlert:", data)
 
 		apsPayload.Alert = &common.ApsAlert{
 			Action:          config.Apns.GetStringField(what, "Action"),
