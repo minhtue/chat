@@ -424,6 +424,7 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 
 		logs.Info.Println("fcm initData:", data)
 		logs.Info.Println("fcm initTopic:", topic)
+		logs.Info.Println("fcm Image:", image)
 
 		apsPayload.Alert = &common.ApsAlert{
 			Action:          config.Apns.GetStringField(what, "Action"),
