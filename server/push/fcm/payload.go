@@ -376,7 +376,8 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 					}
 					notei := public["note"]
 					if notei != nil {
-						note, ok := notei.(map[string]interface{})
+						logs.Info.Println("fcm Topic Note:", notei)
+						note, ok := notei.(map[string]string)
 						if !ok {
 							logs.Info.Println("fcm Topic Note:", ok)
 						}
@@ -384,6 +385,11 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 							logs.Info.Println("fcm Topic Note:", note)
 							logs.Info.Println("fcm Topic Handyman:", note["handyman_name"])
 						}
+						mapping := make(map[string]string)
+						if err := json.Unmarshal(config, &mapping); err != nil {
+							logs.Info.Println("fcm Topic Note:", err)
+						}
+						logs.Info.Println("fcm Topic Note:", mapping["handyman_name"])
 					}
 				}
 				
