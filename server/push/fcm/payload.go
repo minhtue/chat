@@ -364,11 +364,12 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 				logs.Info.Println("fcm Topic Public:", public)
 
 				fn := public["fn"]
-				logs.Info.Println("fcm Topic fn:", fn)
-				// val := reflect.ValueOf(public).Elem()
- 				// note := val.FieldByName("Note").Interface().(string)
+				if fn != nil {
+					logs.Info.Println("fcm Topic fn:", fn)
+				} else {
+					logs.Info.Println("fcm Topic fn is nil")
+				}
 				
-				// logs.Info.Println("fcm Topic Note:", note)
 			}
 
 			logs.Info.Println("fcm Topic Name:", title)
