@@ -293,7 +293,6 @@ type ApsAlert struct {
 	TitleLocKey     string   `json:"title-loc-key,omitempty"`
 	SummaryArg      string   `json:"summary-arg,omitempty"`
 	SummaryArgCount int      `json:"summary-arg-count,omitempty"`
-	Image 			string   `json:"image,omitempty"`
 }
 
 // FCM error codes

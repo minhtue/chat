@@ -429,14 +429,13 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 			Action:          config.Apns.GetStringField(what, "Action"),
 			ActionLocKey:    config.Apns.GetStringField(what, "ActionLocKey"),
 			Body:            body,
-			LaunchImage:     config.Apns.GetStringField(what, "LaunchImage"),
+			LaunchImage:     image,
 			LocKey:          config.Apns.GetStringField(what, "LocKey"),
 			Title:           title,
 			Subtitle:        config.Apns.GetStringField(what, "Subtitle"),
 			TitleLocKey:     config.Apns.GetStringField(what, "TitleLocKey"),
 			SummaryArg:      config.Apns.GetStringField(what, "SummaryArg"),
 			SummaryArgCount: config.Apns.GetIntField(what, "SummaryArgCount"),
-			Image:			 image,
 		}
 	}
 
