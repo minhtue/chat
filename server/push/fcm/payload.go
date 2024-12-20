@@ -5,6 +5,7 @@ import (
 	"errors"
 	"strconv"
 	"time"
+	"reflect"
 
 	fcmv1 "google.golang.org/api/fcm/v1"
 
@@ -383,11 +384,8 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 					notei := public["note"]
 					if notei != nil {
 						logs.Info.Println("fcm Topic Note:", notei)
-						note, ok := notei.(map[string]string)
-						if !ok {
-							logs.Info.Println("fcm Topic Note:", ok)
-						}
-						logs.Info.Println("fcm Topic Note:", note["handyman_name"])
+						
+						logs.Info.Println("Undefined type: ", reflect.TypeOf(notei))
 					}
 				}
 				
