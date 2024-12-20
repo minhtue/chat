@@ -5,7 +5,7 @@ import (
 	"errors"
 	"strconv"
 	"time"
-	"reflect"
+	// "reflect"
 
 	fcmv1 "google.golang.org/api/fcm/v1"
 
@@ -364,10 +364,10 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 			if public != nil {
 				logs.Info.Println("fcm Topic Public:", public)
 
-				val := reflect.ValueOf(public).Elem()
- 				note := val.FieldByName("Note").Interface().(string)
+				// val := reflect.ValueOf(public).Elem()
+ 				// note := val.FieldByName("Note").Interface().(string)
 				
-				logs.Info.Println("fcm Topic Note:", note)
+				// logs.Info.Println("fcm Topic Note:", note)
 			}
 
 			logs.Info.Println("fcm Topic Name:", title)
