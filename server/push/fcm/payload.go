@@ -5,7 +5,6 @@ import (
 	"errors"
 	"strconv"
 	"time"
-	"strings"
 
 	fcmv1 "google.golang.org/api/fcm/v1"
 
