@@ -311,6 +311,9 @@ func androidNotificationConfig(what, topic string, data map[string]string, confi
 					owner_uid := note["owner_uid"]
 					handyman_name := note["handyman_name"]
 					owner_name := note["owner_name"]
+					
+					logs.Info.Println("fcm owner_uid:", owner_uid.(string))
+					logs.Info.Println("fcm xfrom:", xfrom)
 					if owner_uid != nil {
 						if owner_uid.(string) == xfrom {
 							if owner_name != nil {
@@ -453,6 +456,8 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 						owner_uid := note["owner_uid"]
 						handyman_name := note["handyman_name"]
 						owner_name := note["owner_name"]
+						logs.Info.Println("fcm owner_uid:", owner_uid.(string))
+						logs.Info.Println("fcm xfrom:", xfrom)
 						if owner_uid != nil {
 							if owner_uid.(string) == xfrom {
 								if owner_name != nil {
