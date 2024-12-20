@@ -393,6 +393,7 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 
 						logs.Info.Println("fcm Chore Image:", chore_image)
 						if chore_image != nil {
+							logs.Info.Println("fcm HasPrefix: " + strings.HasPrefix(chore_image.(string), "/"))
 							if strings.HasPrefix(chore_image.(string), "/") {
 								image = static_domain + chore_image.(string)
 							} else {
@@ -437,13 +438,14 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 			Action:          config.Apns.GetStringField(what, "Action"),
 			ActionLocKey:    config.Apns.GetStringField(what, "ActionLocKey"),
 			Body:            body,
-			LaunchImage:     image,
+			LaunchImage:     config.Apns.GetStringField(what, "LaunchImage"),
 			LocKey:          config.Apns.GetStringField(what, "LocKey"),
 			Title:           title,
 			Subtitle:        config.Apns.GetStringField(what, "Subtitle"),
 			TitleLocKey:     config.Apns.GetStringField(what, "TitleLocKey"),
 			SummaryArg:      config.Apns.GetStringField(what, "SummaryArg"),
 			SummaryArgCount: config.Apns.GetIntField(what, "SummaryArgCount"),
+			Image:			 image,
 		}
 	}
 
