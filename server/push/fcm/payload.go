@@ -358,16 +358,22 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 
 		if topicData != nil {
 
-			public := topicData.Public
+			publici := topicData.Public
 			
-			if public != nil {
-				logs.Info.Println("fcm Topic Public:", public)
+			if publici != nil {
+				public, ok := publici.(map[string]interface{})
+				if ok != nil {
+					logs.Info.Println("fcm Topic Public:", ok)
+				}
+				if public != nil {
+					logs.Info.Println("fcm Topic Public:", public)
 
-				fn := public["fn"]
-				if fn != nil {
-					logs.Info.Println("fcm Topic fn:", fn)
-				} else {
-					logs.Info.Println("fcm Topic fn is nil")
+					fn := public["fn"]
+					if fn != nil {
+						logs.Info.Println("fcm Topic fn:", fn)
+					} else {
+						logs.Info.Println("fcm Topic fn is nil")
+					}
 				}
 				
 			}
