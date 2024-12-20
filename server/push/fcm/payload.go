@@ -358,7 +358,7 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 
 		if topicData != nil {
 
-			if public, ok := topicData["Public"]; ok {
+			if public, ok := topicData.Public; ok {
 				logs.Info.Println("fcm Topic Public:", public)
 				logs.Info.Println("fcm Topic Note:", public["Note"])
 			}
