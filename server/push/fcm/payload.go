@@ -359,7 +359,6 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 		image := "https://dev.azchore.ca"
 		
 		logs.Info.Println("fcm Apns:", config.Apns)
-		logs.Info.Println("fcm static_domain:", static_domain)
 
 		topicData, _err := store.Topics.Get(topic)
 
