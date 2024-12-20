@@ -352,7 +352,8 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 			body = data["content"]
 		}
 
-		logs.Info.Println("fcm apnsShouldPresentAlert:", data)
+		logs.Info.Println("fcm initData:", data)
+		logs.Info.Println("fcm initTopic:", topic)
 
 		apsPayload.Alert = &common.ApsAlert{
 			Action:          config.Apns.GetStringField(what, "Action"),
