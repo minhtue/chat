@@ -380,23 +380,36 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 						xfrom := data["xfrom"]
 
 						note := jsonToMap(notei.(string))
-						owner_uid := note["owner_uid"].(string)
-						handyman_name := note["handyman_name"].(string)
+
+						owner_uid := note["owner_uid"]
+						handyman_name := note["handyman_name"]
+						owner_name := note["owner_name"]
+						if owner_uid != nil {
+							if owner_uid.(string) == xfrom {
+								if owner_name != nil {
+									title = owner_name.(string)
+								}
+							} else {
+								if handyman_name != nil {
+									title = handyman_name.(string)
+								}
+							}
+						}
+						
 
 						logs.Info.Println("fcm xfrom: ", xfrom)
 						logs.Info.Println("fcm owner_uid: ", owner_uid)
 						logs.Info.Println("fcm handyman_name: ", handyman_name)
 					}
-					fn := public["fn"]
-					if fn != nil {
-						logs.Info.Println("fcm Topic fn:", fn)
-					} else {
-						logs.Info.Println("fcm Topic fn is nil")
+					if title == "" {
+						fn := public["fn"]
+						if fn != nil {
+							title = fn.(string)
+						}
 					}
 				}
 				
 			}
-
 			logs.Info.Println("fcm Topic Name:", title)
 		}
 
@@ -415,7 +428,7 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 			Body:            body,
 			LaunchImage:     config.Apns.GetStringField(what, "LaunchImage"),
 			LocKey:          config.Apns.GetStringField(what, "LocKey"),
-			Title:           config.Apns.GetStringField(what, "Title"),
+			Title:           title,
 			Subtitle:        config.Apns.GetStringField(what, "Subtitle"),
 			TitleLocKey:     config.Apns.GetStringField(what, "TitleLocKey"),
 			SummaryArg:      config.Apns.GetStringField(what, "SummaryArg"),
