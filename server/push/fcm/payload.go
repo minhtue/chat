@@ -349,7 +349,7 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 	if apnsShouldPresentAlert(what, callStatus, data["silent"], config) {
 		body := config.Apns.GetStringField(what, "Body")
 
-		topicData, _err := store.Topics.Get(topic)
+		topicData := store.Topics.Get(topic)
 
 		logs.Info.Println("fcm Topic Info:", topicData)
 
