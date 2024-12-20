@@ -394,6 +394,7 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 						logs.Info.Println("fcm Chore Image:", chore_image)
 						if chore_image != nil {
 							logs.Info.Println("fcm HasPrefix: " + strings.HasPrefix(chore_image.(string), "/"))
+							logs.Info.Println("fcm HasPrefix: " + strings.HasPrefix(chore_image.(string), "\/"))
 							if strings.HasPrefix(chore_image.(string), "/") {
 								image = static_domain + chore_image.(string)
 							} else {
