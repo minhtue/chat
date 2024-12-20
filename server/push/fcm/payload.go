@@ -358,7 +358,11 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 
 		if topicData != nil {
 
-			if public, ok := topicData.Public; ok {
+			public, er := topicData.Public
+			if er != nil {
+				logs.Info.Println("fcm Topic Error:", e)
+			}
+			if public != nil {
 				logs.Info.Println("fcm Topic Public:", public)
 
 				note, e := public.FieldByName("note")
