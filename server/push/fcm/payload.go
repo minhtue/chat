@@ -273,6 +273,68 @@ func androidNotificationConfig(what, topic string, data map[string]string, confi
 	}
 
 	body := config.Android.GetStringField(what, "Body")
+
+	//tuehm
+	title := ""
+	image := "https://dev.azchore.ca"
+
+	topicData, _err := store.Topics.Get(topic)
+
+	if _err != nil {
+		logs.Info.Println("fcm Topic Error:", _err)
+	}
+
+	if topicData != nil {
+
+		publici := topicData.Public
+		
+		if publici != nil {
+			public, ok := publici.(map[string]interface{})
+			if !ok {
+				logs.Info.Println("fcm Topic Public:", ok)
+			}
+			if public != nil {
+				logs.Info.Println("fcm Topic Public:", public)
+				notei := public["note"]
+				if notei != nil {
+					
+					xfrom := data["xfrom"]
+
+					note := jsonToMap(notei.(string))
+
+					chore_image := note["chore_thumb"]
+
+					logs.Info.Println("fcm Chore Image:", chore_image)
+					if chore_image != nil {
+						image += chore_image.(string)
+					}
+					owner_uid := note["owner_uid"]
+					handyman_name := note["handyman_name"]
+					owner_name := note["owner_name"]
+					if owner_uid != nil {
+						if owner_uid.(string) == xfrom {
+							if owner_name != nil {
+								title = owner_name.(string)
+							}
+						} else {
+							if handyman_name != nil {
+								title = handyman_name.(string)
+							}
+						}
+					}
+				}
+				if title == "" {
+					fn := public["fn"]
+					if fn != nil {
+						title = fn.(string)
+					}
+				}
+			}
+			
+		}
+	}
+	//end tuehm
+
 	if body == "$content" {
 		body = data["content"]
 	}
@@ -290,12 +352,13 @@ func androidNotificationConfig(what, topic string, data map[string]string, confi
 		NotificationPriority: priority,
 		Visibility:           string(common.AndroidVisibilityPrivate),
 		TitleLocKey:          config.Android.GetStringField(what, "TitleLocKey"),
-		Title:                config.Android.GetStringField(what, "Title"),
+		Title:                title,
 		BodyLocKey:           config.Android.GetStringField(what, "BodyLocKey"),
 		Body:                 body,
 		Icon:                 config.Android.GetStringField(what, "Icon"),
 		Color:                config.Android.GetStringField(what, "Color"),
 		ClickAction:          config.Android.GetStringField(what, "ClickAction"),
+		Image:				  image
 	}
 
 	return ac
@@ -356,8 +419,6 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 		body := config.Apns.GetStringField(what, "Body")
 		title := ""
 		image := "https://dev.azchore.ca"
-		
-		logs.Info.Println("fcm Apns:", config.Apns)
 
 		topicData, _err := store.Topics.Get(topic)
 
@@ -378,8 +439,7 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 					logs.Info.Println("fcm Topic Public:", public)
 					notei := public["note"]
 					if notei != nil {
-						logs.Info.Println("fcm Topic Note:", notei)
-
+						
 						xfrom := data["xfrom"]
 
 						note := jsonToMap(notei.(string))
