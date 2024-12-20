@@ -377,7 +377,7 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 					if notei != nil {
 						logs.Info.Println("fcm Topic Note:", notei)
 
-						xfrom := data["xfrom"].(string)
+						xfrom := data["xfrom"]
 
 						note := jsonToMap(notei.(string))
 						owner_uid := note["owner_uid"].(string)
