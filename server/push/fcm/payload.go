@@ -455,8 +455,6 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 						owner_uid := note["owner_uid"]
 						handyman_name := note["handyman_name"]
 						owner_name := note["owner_name"]
-						logs.Info.Println("fcm owner_uid:", owner_uid.(string))
-						logs.Info.Println("fcm xfrom:", xfrom)
 						if owner_uid != nil {
 							usrOwner := "usr" + owner_uid.(string)
 							if usrOwner == xfrom {
