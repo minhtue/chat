@@ -690,6 +690,16 @@ func platformFromUA(ua string) string {
 	case strings.Contains(ua, "tinodios"):
 		return "ios"
 	}
+	case strings.Contains(ua, "a-z chore"):
+		switch {
+			case strings.Contains(ua, "ios"):
+				return "ios"
+			case strings.Contains(ua, "android"):
+				return "android"
+			case strings.Contains(ua, "web"):
+				return "web"
+		}
+		return "web"
 	return ""
 }
 
