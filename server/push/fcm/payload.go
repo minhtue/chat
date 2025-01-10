@@ -304,7 +304,7 @@ func androidNotificationConfig(what, topic string, data map[string]string, confi
 
 					chore_image := note["chore_thumb"]
 
-					logs.Info.Println("fcm Chore Image:", chore_image)
+					logs.Info.Println("fcm Chore Image(android):", chore_image)
 					if chore_image != nil {
 						image += chore_image.(string)
 					}
@@ -439,7 +439,7 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 					logs.Info.Println("fcm Topic Public:", ok)
 				}
 				if public != nil {
-					logs.Info.Println("fcm Topic Public:", public)
+					logs.Info.Println("fcm Topic Public(ios):", public)
 					notei := public["note"]
 					if notei != nil {
 						
@@ -450,7 +450,7 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 						chore_image := note["chore_thumb"]
 
 						if chore_image != nil {
-							logs.Info.Println("fcm Chore Image:", chore_image)
+							logs.Info.Println("fcm Chore Image(ios):", chore_image)
 							image += chore_image.(string)
 						}
 						owner_uid := note["owner_uid"]
