@@ -382,6 +382,7 @@ func jsonToMap(jsonStr string) map[string]interface{} {
 }
 
 func apnsNotificationConfig(what, topic string, data map[string]string, unread int, config *configType) *fcmv1.ApnsConfig {
+	logs.Info.Println("fcm Access apnsNotificationConfig")
 	callStatus := data["webrtc"]
 	expires := time.Now().UTC().Add(time.Duration(defaultTimeToLive) * time.Second)
 	if config.TimeToLive > 0 {
