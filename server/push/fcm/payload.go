@@ -448,8 +448,8 @@ func apnsNotificationConfig(what, topic string, data map[string]string, unread i
 
 						chore_image := note["chore_thumb"]
 
-						logs.Info.Println("fcm Chore Image:", chore_image)
 						if chore_image != nil {
+							logs.Info.Println("fcm Chore Image:", chore_image)
 							image += chore_image.(string)
 						}
 						owner_uid := note["owner_uid"]
