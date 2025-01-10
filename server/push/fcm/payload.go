@@ -158,8 +158,6 @@ func PrepareV1Notifications(rcpt *push.Receipt, config *configType) ([]*fcmv1.Me
 			}
 		}
 
-		logs.Warn.Println("fcm: Send to Platform", d.Platform)
-
 		for i := range devList {
 			d := &devList[i]
 			if _, ok := skipDevices[d.DeviceId]; !ok && d.DeviceId != "" {
